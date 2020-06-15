@@ -1,1 +1,1 @@
-web: java -jar target/embeddedTomcatSample.jar
+web: sh target/bin/webapp

@@ -1,0 +1,1 @@
+web: java -jar target/embeddedTomcatSample-s1.0-SNAPSHOT.jar

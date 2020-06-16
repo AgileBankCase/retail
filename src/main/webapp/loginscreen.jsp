@@ -78,18 +78,23 @@
     </style>
 </head>
 <body>
+	 <div>
+         <c:if test="${msg != ''}">
+         <p>
+         ${msg}</p>
+         </c:if></div> 
 	<div class="main-section">
 		<div class="content-section">
 			<div class="head-section">
 				<h3>Login</h3>
 			</div>
 			<div class="body-section">
-				<form>
+				<form action="/login" method="post">
 					<div class="form-input">
-						<input type="text" name="" placeholder="Username or Email">
+						<input type="text" name="username" placeholder="Username">
 					</div>
 					<div class="form-input">
-						<input type="text" name="" placeholder="Password">
+						<input type="text" name="password" placeholder="Password">
 					</div>
 					<div class="form-input">
 						<input type="checkbox" name=""> <label>Remember me</label>

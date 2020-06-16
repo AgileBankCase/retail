@@ -28,7 +28,10 @@
         <li>Account Management</li>
         <li>Status Details</li>
         <li>Account Operations</li>
-        <li>Logout</li>
+        <li>
+        <a onclick="confirmLogout()">
+        Logout
+        </a></a></li>
     </ul>
 </header>
  
@@ -52,7 +55,13 @@
     </tr>
     </table>
     </table>
-     
+     <script>
+     function confirmLogout(){
+    	 if(confirm("Are you sure you want to log out?")){
+    		 document.location.href="/logout";	
+    	 }
+     }
+     </script>
     </body>
     
     <footer>

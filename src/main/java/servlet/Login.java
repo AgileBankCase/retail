@@ -18,7 +18,7 @@ import service.Validator;
         name = "MyServlet",
         urlPatterns = {"/login"}
     )
-public class HelloServlet extends HttpServlet {
+public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -40,7 +40,7 @@ public class HelloServlet extends HttpServlet {
         		session.setAttribute("type", accountType);
         		
         		if(accountType.equals("executive")) {
-        			RequestDispatcher requestDispatcher = req.getRequestDispatcher("customer search.html");
+        			RequestDispatcher requestDispatcher = req.getRequestDispatcher("create customer screen.jsp");
             		requestDispatcher.forward(req, resp);
         		}
         		else if(accountType.equals("cashier")) {

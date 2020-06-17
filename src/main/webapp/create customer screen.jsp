@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
         #navbar{
            list-style:none;
@@ -28,19 +29,27 @@
         <li>Account Management</li>
         <li>Status Details</li>
         <li>Account Operations</li>
-        <li>Logout</li>
+        <li>
+        <a onclick="confirmLogout()">
+        Logout
+        </a></li>
     </ul>
 </header>
- 
+<div>
+         <p id="msg"></p>
+         </div> 
+         <form>
 <table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
+
 <center><tr>
    <td><h1>Create Customer Screen</h1></td>
 </tr><center>
- 
+
 <table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
+
 <tr>
     <td align='center'>Customer SSN Id</td>
-    <td><input name='customer-id' pattern="[0-9]{9}"></td>
+    <td><input name='ssn-id' pattern="[0-9]{9}"></td>
 </tr>
 <tr> <td>&nbsp;</td> </tr>
 <tr>
@@ -50,23 +59,23 @@
 <tr> <td>&nbsp;</td> </tr>
 <tr>
     <td align='center'>Age</td>
-    <td><input name='age' min="1" max="3" pattern="[0-9]"></td>
+    <td><input type="number" name='age' min="1" max="3" pattern="[0-9]"></td>
 </tr>
 <tr> <td>&nbsp;</td> </tr>
 <tr>
     <td align='center'>Address1</td>
-    <td><input name='name'></td>
+    <td><input name='addline1'></td>
 </tr>
 <tr> <td>&nbsp;</td> </tr>
 <tr>
     <td align='center'>Address2</td>
-    <td><input name='name'></td>
+    <td><input name='addline2'></td>
 </tr>
 <tr> <td>&nbsp;</td> </tr>
 <tr>
     <td align='center'>City</td>
     <td>
-    <select>
+    <select name='city'>
         <option>Select</option>
         <option>Pune</option>
         <option>Chennai</option>
@@ -88,7 +97,7 @@
 <tr>
     <td align='center'>State</td>
     <td>
-    <select>
+    <select name='state'>
         <option>Select</option>
         <option>Arunachal Pradesh</option>
         <option>Assam</option>
@@ -108,14 +117,39 @@
 
 <table border='0' cellpadding='0' cellspacing='0' width='480px' align='center'>
 <tr>
-    <td align='center'><input type='submit' name='REGISTER' value="Submit"></td>
+    <td align='center'><button onclick="register(event)"  >Submit</button></td>
 </tr>
+
 </table>
+
 </table>
  
-</table>
+</table></form>
 </body>
+<script>
+     function confirmLogout(){
+    	 if(confirm("Are you sure you want to log out?")){
+    		 document.location.href="/logout";	
+    	 }
+     }
+     function register(event){
+    	 event.preventDefault();
+             $.ajax({
+                 method: "post",
+                 url: "/customer", 
+                 data: $('form').serialize(),
+                 success: function(data){
+ 
+                	 var json = JSON.parse(data);
+                     alert(json["status"]);
+					if(json["status"]=="Succesfully Registered!"){
+						document.location.reload();
+					}
+                 }
+             });
 
+     }
+     </script>
 <footer>
     <ul id = "footer">
         <li>About Us</li>

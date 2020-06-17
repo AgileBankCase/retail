@@ -1,142 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        #navbar{
-           list-style:none;
-           background: #000000; 
-           color:#ffffff;
-           display:flex;
-           justify-content: space-around;
-        }
-
-        #footer{
-            list-style: none;
-            padding : 50px 50px;
-            display: flex;
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color:#000000;
-            color: white;
-            justify-content: space-around;
-        }.main-section{
-	width: 460px;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-ul {
-    list-style-type: none;
-  padding : 20px 20px;
-  margin: 0;
-  width: 100%;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-}
-
-li a, .dropbtn {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
-}
-
-li.dropdown {
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1;}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}     
-    </style>
+<style>
+</style>
 </head>
-<body bgcolor= #E6E6FA>
-    <h1 align='center'><strong>AGILE BANK</strong></h1>
-    <ul>
-        <li><a href="#home">Hello User!!!</a></li>
-        
-          <li class="dropdown">
-          <a href="javascript:void(0)" class="dropbtn">Account Details</a>
-          <div class="dropdown-content">
-            <a href="#">Customer Search</a>
-            <a href="#"> Account Serch</a>
-          </div>    
-        </li>
-        <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">Account Operations</a>
-            <div class="dropdown-content">
-              <a href="#">Withdraw Money</a>
-              <a href="#">Deposit Money</a>
-              <a href="#">Transfer Money</a>
-            </div>
-          </li>
-        <li><a href="#home">Account Statements</a></li>
-        <li><a href="#home">Logout</a></li>
-      </ul>
- 
-<table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
-<tr>
-    <td align='center'>Customer  SSN Id</td>
-    <td><input name='customer-ssn-id' pattern="[0-9]{9}"></td>
-</tr>
-<tr> <td>&nbsp;</td> </tr>
-<tr><td align='center'><p>OR</p></td></tr>
+<body bgcolor=#E6E6FA>
+	<jsp:include page="header.jsp" />
+	<div class="mainpage">
+		<div id="searchcustomer">
+			<form id="search">
+				<table border='0' width='480px' cellpadding='0' cellspacing='0'
+					align='center'>
+					<tr>
 
-<tr>
-    <td align='center'>Customer Id</td>
-    <td><input name='cid' pattern="[0-9]{9}"></td>
-</tr>
-<tr> <td>&nbsp;</td> </tr>
-<table border='0' cellpadding='0' cellspacing='0' width='480px' align='center'>
-    <tr>
-        <td align='center'><input type='submit' name='REGISTER' value="View"></td>
-    </tr>
-    </table>
-    </table>
-    </div>
-     
-    </body>
-    
-    <footer>
-        <ul id = "footer">
-            <li>About Us
-                <p>We are a well developing Bank containing a lots of schemes </p>
-                <p>developed and helpful to the common people</p></li>
-            <li>Services
-                <p>dwhjdjhielnwkchlwk</p></li>
-            <li>Contact us
-                <p>Ms.M.Shafana Aasmi,CEO Agile bank,866766875 </p></li>
-        </ul>
-    </footer>
-    </html>
+						<td align='center'>Customer SSN Id</td>
+						<td><input name='ssn-id' pattern="[0-9]{9}"></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td align='center'><p>OR</p></td>
+					</tr>
+
+					<tr>
+						<td align='center'>Customer Id</td>
+						<td><input name='cid' pattern="[0-9]{9}"></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+					</tr>
+					<table border='0' cellpadding='0' cellspacing='0' width='480px' align='center'>
+						<tr>
+							<td align='center'><button
+									onclick="javascript:getCustomer(event);">Submit</button></td>
+						</tr>
+					</table>
+				</table>
+			</form>
+		</div>
+		<div id="updatecustomer" class="hide">
+			<jsp:include page="updatecustomerscreen.jsp" />
+		</div>
+	</div>
+	<script>
+		function getJsonFromUrl(url) {
+			if (!url)
+				url = location.search;
+			var query = url.substr(1);
+			var result = {};
+			query.split("&").forEach(function(part) {
+				var item = part.split("=");
+				result[item[0]] = decodeURIComponent(item[1]);
+			});
+			return result;
+		}
+		function getCustomer(event) {
+			event.preventDefault();
+			var url = window.location.href;
+			var result = getJsonFromUrl(url);
+			var action = result["action"];
+			$.ajax({
+				method : "get",
+				url : "/customersearch",
+				data : $('#search').serialize() + "&action=" + action,
+				success : function(data) {
+					var json = JSON.parse(data);
+					var userDetails = json["User_Details"];
+					userDetails.forEach(user => {
+						$("#cusssnID").html(user["Customer SSN ID"]);
+						$("#cusID").html(user["Customer ID"]);
+						$("#cusname").html(user["Name"]);
+						$("#age").html(user["Age"]);
+						$("#address1").html(user["Address Line 1"]);
+						$("#address2").html(user["Address Line 2"]);
+						$("#updatecustomer").attr("class","");
+						$("#searchcustomer").attr("class","hide");	
+					});
+				}
+			});
+		}
+	</script>
+	<jsp:include page="footer.jsp" />
+</body>
+
+</html>

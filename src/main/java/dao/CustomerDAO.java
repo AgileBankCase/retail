@@ -10,79 +10,69 @@ import service.DBUtil;
 import service.Validator;
 
 public class CustomerDAO {
-	
+
 	static Logger logger = Logger.getLogger(LoginDAO.class.getName());
-	static int affectedrows=0;
-	public static int registerCustomer(String ssnid,String name,int age,String addline1,String addline2,String city,String state){
+
+	public static int registerCustomer(String ssnid, String name, int age, String addline1, String addline2,
+			String city, String state) {
+		int affectedrows = 0;
 		try {
 			Connection conn = DBUtil.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("INSERT INTO public.customer_details(\r\n" + 
-					"	\"Customer_SSN_ID\", \"Name\", \"Age\", \"Address_Line_1\", \"Address_Line_2\", \"State\", \"City\")\r\n" + 
-					"	VALUES (?, ?, ?, ?, ?, ?, ?);");  
-			stmt.setLong(1,Long.parseLong(ssnid));//1 specifies the first parameter in the query  
-			stmt.setString(2,name); 
-			stmt.setInt(3,age);
-			stmt.setString(4,addline1);
-			stmt.setString(5,addline2);
-			stmt.setString(6,state);
-			stmt.setString(7,city);
-			
-			 affectedrows=stmt.executeUpdate();  
-			
-			
-		}catch(Exception e) {
-			logger.log(Level.SEVERE,"Exception Occured",e);
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO public.customer_details(\r\n"
+					+ "	\"Customer_SSN_ID\", \"Name\", \"Age\", \"Address_Line_1\", \"Address_Line_2\", \"State\", \"City\")\r\n"
+					+ "	VALUES (?, ?, ?, ?, ?, ?, ?);");
+			stmt.setLong(1, Long.parseLong(ssnid));// 1 specifies the first parameter in the query
+			stmt.setString(2, name);
+			stmt.setInt(3, age);
+			stmt.setString(4, addline1);
+			stmt.setString(5, addline2);
+			stmt.setString(6, state);
+			stmt.setString(7, city);
+
+			affectedrows = stmt.executeUpdate();
+
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Exception Occured", e);
 		}
 		return affectedrows;
 	}
-	
-	//update
-	public static int updateCustomer(String ssnid,String name,int age,String addline1,String addline2,String city,String state){
+
+	// update
+	public static int updateCustomer(String cusId, String name, int age, String addline1, String addline2) {
+		int affectedrows = 0;
 		try {
 			Connection conn = DBUtil.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("");  
-			stmt.setLong(1,Long.parseLong(ssnid));//1 specifies the first parameter in the query  
-			stmt.setString(2,name); 
-			stmt.setInt(3,age);
-			stmt.setString(4,addline1);
-			stmt.setString(5,addline2);
-			stmt.setString(6,state);
-			stmt.setString(7,city);
-			
-			 affectedrows=stmt.executeUpdate();  
-			if(affectedrows>0) {
-				return 1;
-			}
-			
-		}catch(Exception e) {
-			logger.log(Level.SEVERE,"Exception Occured",e);
+			PreparedStatement stmt = conn.prepareStatement("UPDATE public.customer_details\r\n"
+					+ "	SET  \"Name\"=?, \"Age\"=?, \"Address_Line_1\"=?, \"Address_Line_2\"=?\r\n"
+					+ "	WHERE \"Customer_ID\"=?;");
+
+			stmt.setString(1, name);
+			stmt.setInt(2, age);
+			stmt.setString(3, addline1);
+			stmt.setString(4, addline2);
+			stmt.setLong(5, Long.parseLong(cusId));
+			affectedrows = stmt.executeUpdate();
+
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Exception Occured", e);
 		}
-		return 0;
+		return affectedrows;
 	}
-	//delete
-	public static String deleteCustomer(String ssnid,String name,int age,String addline1,String addline2,String city,String state){
+
+	// delete
+	public static int deleteCustomer(String ssnid, String cusId) {
+		int affectedrows = 0;
 		try {
-			
 			Connection conn = DBUtil.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("INSERT INTO public.customer_details(\r\n" + 
-					"	\"Customer_SSN_ID\", \"Name\", \"Age\", \"Address_Line_1\", \"Address_Line_2\", \"State\", \"City\")\r\n" + 
-					"	VALUES (?, ?, ?, ?, ?, ?, ?);");  
-			stmt.setLong(1,Long.parseLong(ssnid));//1 specifies the first parameter in the query  
-			stmt.setString(2,name); 
-			stmt.setInt(3,age);
-			stmt.setString(4,addline1);
-			stmt.setString(5,addline2);
-			stmt.setString(6,state);
-			stmt.setString(7,city);
-			
-			 affectedrows=stmt.executeUpdate();  
-			if(affectedrows>0) {
-				return "Succesfully Registered!";
-			}
-			
-		}catch(Exception e) {
-			logger.log(Level.SEVERE,"Exception Occured",e);
+			PreparedStatement stmt = conn.prepareStatement(
+					"DELETE FROM public.customer_details\r\n" + " WHERE \"Customer_SSN_ID\"=? or \"Customer_ID\"=?;");
+			stmt.setLong(1, Long.parseLong(ssnid));
+			stmt.setString(2, cusId);
+			affectedrows = stmt.executeUpdate();
+
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Exception Occured", e);
 		}
-		return "Not Registered!";
+		return affectedrows;
 	}
 }

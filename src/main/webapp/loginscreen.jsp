@@ -46,6 +46,13 @@
 	padding:10px 10px;
 	box-shadow: 0px 0px 0px 5px rgb(239,244,247);
 }
+.body-section .form-input input[type='password']{
+	width: calc(100% - 30px);
+	border: 1px solid #D3D3D3;
+	border-radius: 1px;
+	padding:10px 10px;
+	box-shadow: 0px 0px 0px 5px rgb(239,244,247);
+}
 .body-section .form-input input[type='checkbox']{
 	float: left;
 }
@@ -63,38 +70,23 @@
 	padding:7px 20px;
 	border-radius: 15px;
 }
-.footer-section{
-	color: #F1F1F1;
-	text-align: center;
-	padding-top: 15px;
-	font-size: 12px;
-}
-.footer-section a{
-	color: #fff;
-	font-weight: bold;
-	text-decoration: none;
-	color: #000000;
-}
+
+
     </style>
 </head>
 <body>
-	 <div>
-         <c:if test="${msg != ''}">
-         <p>
-         ${msg}</p>
-         </c:if></div> 
 	<div class="main-section">
 		<div class="content-section">
 			<div class="head-section">
 				<h3>Login</h3>
 			</div>
 			<div class="body-section">
-				<form action="/login" method="post">
+				<form>
 					<div class="form-input">
-						<input type="text" name="username" placeholder="Username">
+						<input type="text" name="" placeholder="Username or Email">
 					</div>
 					<div class="form-input">
-						<input type="text" name="password" placeholder="Password">
+						<input type="password" name="" placeholder="Password">
 					</div>
 					<div class="form-input">
 						<input type="checkbox" name=""> <label>Remember me</label>
@@ -103,11 +95,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="footer-section">
-			<a href="">Forgot your password?<u> Click here to reset it</u></a>
-			
-			
-		</div>
+		
 	</div>
 </body>
 </html>

@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
         		session.setAttribute("type", accountType);
         		
         		if(accountType.equals("executive")) {
-        			RequestDispatcher requestDispatcher = req.getRequestDispatcher("create customer screen.jsp");
+        			RequestDispatcher requestDispatcher = req.getRequestDispatcher("createcustomerscreen.jsp");
             		requestDispatcher.forward(req, resp);
         		}
         		else if(accountType.equals("cashier")) {

@@ -25,11 +25,11 @@ public class CheckLogin extends HttpServlet {
     	HttpSession session=req.getSession();
     	if(session.getAttribute("uname")!=null||session.getAttribute("uname")=="") {
     		if(session.getAttribute("type").equals("executive")) {
-    			RequestDispatcher requestDispatcher = req.getRequestDispatcher("create customer screen.jsp");
+    			RequestDispatcher requestDispatcher = req.getRequestDispatcher("createcustomerscreen.jsp");
         		requestDispatcher.forward(req, resp);
     		}
     		else if(session.getAttribute("type").equals("cashier")) {
-    			RequestDispatcher requestDispatcher = req.getRequestDispatcher("transfer money.html");
+    			RequestDispatcher requestDispatcher = req.getRequestDispatcher("transfermoney.html");
         		requestDispatcher.forward(req, resp);
     		}
     	}

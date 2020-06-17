@@ -53,14 +53,16 @@ public class Customer extends HttpServlet {
     }
     
    //doPut() //used for update customer
-	/*
-	 * protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws
-	 * ServletException, IOException {
-	 * 
-	 * String ssnid=(String) session.getAttribute("ssnid"); String
-	 * result=CustomerDAO.updateCustomer(ssnid, name, age, addline1, addline2, city,
-	 * state) }
-	 */
+	
+	  protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws
+	  ServletException, IOException {
+	  
+	//String ssnid=req.getParameter("ssn-id");
+	
+//	  int result=CustomerDAO.updateCustomer(ssnid, name, age, addline1, addline2, city,
+//	  state) 
+		  }
+	 
    //doDelete() //used for delete customer
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

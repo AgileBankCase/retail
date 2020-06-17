@@ -37,12 +37,10 @@ public class CustomerDAO {
 	}
 	
 	//update
-	public static String updateCustomer(String ssnid,String name,int age,String addline1,String addline2,String city,String state){
+	public static int updateCustomer(String ssnid,String name,int age,String addline1,String addline2,String city,String state){
 		try {
 			Connection conn = DBUtil.getConnection();
-			PreparedStatement stmt=conn.prepareStatement("INSERT INTO public.customer_details(\r\n" + 
-					"	\"Customer_SSN_ID\", \"Name\", \"Age\", \"Address_Line_1\", \"Address_Line_2\", \"State\", \"City\")\r\n" + 
-					"	VALUES (?, ?, ?, ?, ?, ?, ?);");  
+			PreparedStatement stmt=conn.prepareStatement("");  
 			stmt.setLong(1,Long.parseLong(ssnid));//1 specifies the first parameter in the query  
 			stmt.setString(2,name); 
 			stmt.setInt(3,age);
@@ -53,13 +51,13 @@ public class CustomerDAO {
 			
 			 affectedrows=stmt.executeUpdate();  
 			if(affectedrows>0) {
-				return "Succesfully Registered!";
+				return 1;
 			}
 			
 		}catch(Exception e) {
 			logger.log(Level.SEVERE,"Exception Occured",e);
 		}
-		return "Not Registered!";
+		return 0;
 	}
 	//delete
 	public static String deleteCustomer(String ssnid,String name,int age,String addline1,String addline2,String city,String state){

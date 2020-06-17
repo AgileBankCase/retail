@@ -81,12 +81,12 @@
 				<h3>Login</h3>
 			</div>
 			<div class="body-section">
-				<form>
+				<form action="/login" method="post">
 					<div class="form-input">
-						<input type="text" name="" placeholder="Username or Email">
+						<input type="text" name="username" placeholder="Username or Email">
 					</div>
 					<div class="form-input">
-						<input type="password" name="" placeholder="Password">
+						<input type="password" name="password" placeholder="Password">
 					</div>
 					<div class="form-input">
 						<input type="checkbox" name=""> <label>Remember me</label>

@@ -30,7 +30,11 @@ public class HelloServlet extends HttpServlet {
     	if(Validator.isValidString(username) && Validator.isValidString(password)) { 
     		accountType = LoginDAO.checkCredentials(username,password);
     		
-    		if(Validator.isValidString(accountType)) {
+    		if(accountType.equals("mismatch")){
+        		req.setAttribute("msg", "Username or Password not correct!");
+        		RequestDispatcher requestDispatcher = req.getRequestDispatcher("loginscreen.jsp");
+        		requestDispatcher.forward(req, resp);
+        	}else if(Validator.isValidString(accountType)) {
     			HttpSession session=req.getSession();
     			session.setAttribute("uname", username);
         		session.setAttribute("type", accountType);
@@ -44,13 +48,7 @@ public class HelloServlet extends HttpServlet {
             		requestDispatcher.forward(req, resp);
         		}
     		}
-    		
-    		else if(accountType.equals("mismatch")){
-        		req.setAttribute("msg", "Username or Password not correct!");
-        		RequestDispatcher requestDispatcher = req.getRequestDispatcher("loginscreen.jsp");
-        		requestDispatcher.forward(req, resp);
-        	}
-        }else if(accountType.equals("false")){
+    	}else if(accountType.equals("false")){
     		req.setAttribute("msg", "Username or Password should not be empty!");
     		RequestDispatcher requestDispatcher = req.getRequestDispatcher("loginscreen.jsp");
     		requestDispatcher.forward(req, resp);

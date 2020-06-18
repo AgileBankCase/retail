@@ -1,44 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<style>
-#navbar {
-	list-style: none;
-	background: #000000;
-	color: #ffffff;
-	display: flex;
-	justify-content: space-around;
-}
-
-#footer {
-	list-style: none;
-	padding: 50px 50px;
-	display: flex;
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	background-color: #000000;
-	color: white;
-	justify-content: space-around;
-}
-
-.main-section {
-	width: 460px;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-</style>
 </head>
 <body bgcolor=#E6E6FA>
 	<jsp:include page="header.jsp" />
-
 	<div>
-		<p id="msg"></p>
-	</div>
 	<form>
 		<table border='0' width='480px' cellpadding='0' cellspacing='0'
 			align='center'>
@@ -135,6 +101,7 @@
 					</table>
 		</table>
 	</form>
+	</div>
 </body>
 <script>
 	function updateCustomer() {

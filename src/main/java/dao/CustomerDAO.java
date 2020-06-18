@@ -11,7 +11,7 @@ import service.Validator;
 
 public class CustomerDAO {
 
-	static Logger logger = Logger.getLogger(LoginDAO.class.getName());
+	static Logger logger = Logger.getLogger(CustomerDAO.class.getName());
 
 	public static int registerCustomer(String ssnid, String name, int age, String addline1, String addline2,
 			String city, String state) {

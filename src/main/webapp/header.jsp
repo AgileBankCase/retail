@@ -79,7 +79,7 @@ li.dropdown {
 	<strong>AGILE BANK</strong>
 </h1>
 <ul>
-        <li><a href="#home">Hello ${uname}!!!</a></li>
+        <li><a href="/createcustomerscreen.jsp">Hello ${uname}!!!</a></li>
         <li class="dropdown">
           <a href="javascript:void(0)" class="dropbtn">Customer Management</a>
           <div class="dropdown-content">
@@ -90,8 +90,8 @@ li.dropdown {
           <li class="dropdown">
           <a href="javascript:void(0)" class="dropbtn">Account Management</a>
           <div class="dropdown-content">
-            <a href="#">Create Account</a>
-            <a href="#">Delete Account</a>
+            <a href="/createaccount.jsp">Create Account</a>
+            <a href="/deleteaccount.jsp">Delete Account</a>
           </div>    
         </li>
         <li><a onclick="confirmLogout()" >Logout</a></li>

@@ -6,13 +6,16 @@
 </head>
 <body bgcolor=#E6E6FA>
 	<jsp:include page="header.jsp" />
-	<div class="mainpage">
+	
+	<div>
 		<div id="searchcustomer">
 			<form id="search">
 				<table border='0' width='480px' cellpadding='0' cellspacing='0'
 					align='center'>
 					<tr>
-
+						<td colspan="2" align="center"><h1><span id="title"></span> Customer Screen</h1></td>
+					</tr>
+					<tr>
 						<td align='center'>Customer SSN Id</td>
 						<td><input id="ssn-id" name='ssn-id' pattern="[0-9]{9}"></td>
 					</tr>
@@ -47,6 +50,8 @@
 		</div>
 	</div>
 	<script>
+		var action = ""; 
+		
 		function getJsonFromUrl(url) {
 			if (!url)
 				url = location.search;
@@ -57,16 +62,25 @@
 				result[item[0]] = decodeURIComponent(item[1]);
 			});
 			return result;
-		}
+		} 
+		
+		$(document).ready(function() {
+			var url = window.location.href;
+			var result = getJsonFromUrl(url);
+			action = result["action"];
+			if(action=="update"){
+				$("#title").html("Update");
+			}else if(action=="delete"){
+				$("#title").html("Delete");
+			}
+		});
+		
 		function getCustomer(event) {
 			event.preventDefault();
 			if($("#ssn-id").val()=="" && $("#cus-id").val()==""){
 				alert("Both Customer ID and Customer SSN ID cannot be empty !");
 				return;s
 			}
-			var url = window.location.href;
-			var result = getJsonFromUrl(url);
-			var action = result["action"];
 			$.ajax({
 				method : "get",
 				url : "/customersearch",

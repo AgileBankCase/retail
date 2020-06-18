@@ -1,12 +1,13 @@
 RETAIL BANKING PROJECT
-<font size="12">
+
+/*************************************************************************************************************
 CONTINUOUS INTEGRATION	Github	https://github.com/AgileBankCase/retail.git	branch master
 
 CONTINUOUS DEPLOYMENT
 Heroku - Heroku is a Platform as a Service (PaaS) that enables developers to build, run and operate applications entirely in the cloud.	https://agile-bank.herokuapp.com/   - use this link to view the project	
 username- admin	
 password-admin
-</font>
+/*****************************************************************************************************************
 SERVER - Embedded TOM CAT 8.5
 
 DATABASE

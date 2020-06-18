@@ -60,14 +60,14 @@ public class CustomerDAO {
 	}
 
 	// delete
-	public static int deleteCustomer(String ssnid, String cusId) {
+	public static int deleteCustomer( String cusId) {
 		int affectedrows = 0;
 		try {
 			Connection conn = DBUtil.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(
-					"DELETE FROM public.customer_details\r\n" + " WHERE \"Customer_SSN_ID\"=? or \"Customer_ID\"=?;");
-			stmt.setLong(1, Long.parseLong(ssnid));
-			stmt.setString(2, cusId);
+					"DELETE FROM public.customer_details\r\n" + " WHERE \"Customer_ID\"=?;");
+		
+			stmt.setLong(1, Long.parseLong(cusId));
 			affectedrows = stmt.executeUpdate();
 
 		} catch (Exception e) {

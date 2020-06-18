@@ -84,24 +84,6 @@ li.dropdown {
 </head>
 <body bgcolor= #E6E6FA>
     <h1 align='center'><strong>AGILE BANK</strong></h1>
-    <ul>
-        <li><a href="#home">Hello User!!!</a></li>
-        <li class="dropdown">
-          <a href="javascript:void(0)" class="dropbtn">Customer Management</a>
-          <div class="dropdown-content">
-            <a href="#">Create Customer Screen</a>
-            <a href="#">Update Customer Screen</a>
-            <a href="#">Delete Customer Screen</a>
-          </div>
-          <li class="dropdown">
-          <a href="javascript:void(0)" class="dropbtn">Account Management</a>
-          <div class="dropdown-content">
-            <a href="#">Create Account</a>
-            <a href="#">Delete Account</a>
-          </div>    
-        </li>
-        <li><a href="#home">Logout</a></li>
-      </ul>
  
 <table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
 <center><tr>
@@ -111,51 +93,63 @@ li.dropdown {
 <table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
 <tr>
     <td>Customer SSN Id</td>
-    <td><input name='customer-id'></td>
+    <td><span id="dcusssnID"></span></td>
 </tr>
 <tr> <td>&nbsp;</td> </tr>
 <tr>
     <td>Customer Id</td>
-    <td><input type='text' name='cid'></td>
+    <td><span id="dcusID"></span></td>
 </tr>
 <tr> <td>&nbsp;</td> </tr>
 <tr>
     <td>Customer Name</td>
-    <td><input name='name'></td>
+    <td><span id="dcusname"></span></td>
 </tr>
-<tr> <td>&nbsp;</td> </tr>
-<tr>
-    <td>Address</td>
-    <td><input name='name'></td>
-</tr>
-
 <tr> <td>&nbsp;</td> </tr>
 <tr>
     <td>Age</td>
-    <td><input name='age'></td>
+    <td><span id="dage"></span></td>
 </tr>
+<tr> <td>&nbsp;</td> </tr>
+<tr>
+    <td>Address line 1</td>
+    <td><span id="daddress1"></span></td>
+</tr>
+<tr>
+    <td>Address line 2</td>
+    <td><span id="daddress2"></span></td>
+</tr>
+
 <tr> <td>&nbsp;</td> </tr>
 
 <tr>
-    <td><input type='submit' name='Delete customer' value="Delete Customer "></td>
+    <td><button onclick="javascript:deletecustomer(event)">Delete</button></td>
 
-    <td><input type='button' name='cancel' value="Cancel "></td>
+    <td><button onclick="javascript:cancelEvent()">Cancel</button></td>
 </tr>
 </table>
  
 </table>
 </div>
+<script>
+function deletecustomer(event) {
+			event.preventDefault();
+			if(confirm("Are you sure you want to delete?")){
+			$.ajax({
+				type : "delete",
+				url : "/customer?" + "cusid=" + $("#dcusID").html(),
+				success : function(data) {
+					var json = JSON.parse(data);
+					alert(json["status"]);
+					if (json["status"] == "Succesfully Deleted!") {
+						document.location.reload();
+					}
+					
+				}
+			});
+			}
+		}
+</script>
 </body>
 
-<footer>
-    <ul id = "footer">
-        <li>About Us
-            <p>We are a well developing Bank containing a lots of schemes </p>
-            <p>developed and helpful to the common people</p></li>
-        <li>Services
-            <p>dwhjdjhielnwkchlwk</p></li>
-        <li>Contact us
-            <p>Ms.M.Shafana Aasmi,CEO Agile bank,866766875 </p></li>
-    </ul>
-</footer>
 </html>

@@ -131,15 +131,5 @@ li.dropdown {
     </div>
     </body>
     
-    <footer>
-        <ul id = "footer">
-            <li>About Us
-                <p>We are a well developing Bank containing a lots of schemes </p>
-                <p>developed and helpful to the common people</p></li>
-            <li>Services
-                <p>dwhjdjhielnwkchlwk</p></li>
-            <li>Contact us
-                <p>Ms.M.Shafana Aasmi,CEO Agile bank,866766875 </p></li>
-        </ul>
-    </footer>
+    
     </html>

@@ -82,7 +82,8 @@ public class Customer extends HttpServlet {
 
 	// doDelete() //used for delete customer
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		String cusid = req.getParameter("dcusid");
+		CustomerDAO.deleteCustomer(cusid)
 	}
 	// doGet()//used for customer status display if time permits
 }

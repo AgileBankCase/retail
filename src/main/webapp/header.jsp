@@ -84,8 +84,8 @@ li.dropdown {
           <a href="javascript:void(0)" class="dropbtn">Customer Management</a>
           <div class="dropdown-content">
             <a href="#">Create Customer Screen</a>
-            <a href="#">Update Customer Screen</a>
-            <a href="#">Delete Customer Screen</a>
+            <a href="/customersearch.jsp?action=update">Update Customer Screen</a>
+            <a href="/customersearch.jsp?action=delete">Delete Customer Screen</a>
           </div>
           <li class="dropdown">
           <a href="javascript:void(0)" class="dropbtn">Account Management</a>

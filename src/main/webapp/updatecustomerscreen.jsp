@@ -87,6 +87,7 @@
 							align='center'>
 							<tr>
 								<td align='center'><button onclick="javascript:updatecustomer(event)">Update</button></td>
+								<td><button onclick="javascript:cancelEvent()">Cancel</button></td>
 							</tr>
 						</table>
 					</table>

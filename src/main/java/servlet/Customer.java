@@ -56,12 +56,6 @@ public class Customer extends HttpServlet {
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
-			InputStream in = req.getInputStream();
-			byte[] b = new byte[200];
-			in.read(b);
-			String params = new String(b, StandardCharsets.UTF_8);
-			HashMap<String, String> parameters = new HashMap();
-			
 			String cusid = req.getParameter("cusid");
 			String name = req.getParameter("ncname");
 			String age = req.getParameter("nage");
@@ -83,7 +77,17 @@ public class Customer extends HttpServlet {
 	// doDelete() //used for delete customer
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cusid = req.getParameter("dcusid");
-		CustomerDAO.deleteCustomer(cusid)
+		try{
+			int result=CustomerDAO.deleteCustomer(cusid);
+			if (result > 0) {
+				resp.getOutputStream().print("{\"status\":\"Succesfully Deleted!\"}");
+				return;
+			}
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Exception occured", e);
+		}
+		resp.getOutputStream().print("{\"status\":\"Delete failed\"}");
+		return;
 	}
 	// doGet()//used for customer status display if time permits
 }

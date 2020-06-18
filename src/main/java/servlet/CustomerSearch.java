@@ -29,9 +29,9 @@ public class CustomerSearch extends HttpServlet {
     	String ssnIdStr=req.getParameter("ssn-id");
     	String cusIdStr=req.getParameter("cid");
     	long ssnID=-1l,cusID=-1l;
-    	if(ssnIdStr!=null) {
+    	if(Validator.isValidString(ssnIdStr)) {
     		ssnID=Long.parseLong(ssnIdStr);
-    	}else if(cusIdStr!=null) {
+    	}else if(Validator.isValidString(cusIdStr)) {
     		cusID=Long.parseLong(cusIdStr);
     	}
     	JSONObject json=CustomerSearchDAO.userDetails(ssnID,cusID);

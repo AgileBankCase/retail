@@ -14,7 +14,7 @@
 					<tr>
 
 						<td align='center'>Customer SSN Id</td>
-						<td><input name='ssn-id' pattern="[0-9]{9}"></td>
+						<td><input id="ssn-id" name='ssn-id' pattern="[0-9]{9}"></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
@@ -25,7 +25,7 @@
 
 					<tr>
 						<td align='center'>Customer Id</td>
-						<td><input name='cid' pattern="[0-9]{9}"></td>
+						<td><input id="cus-id" name='cid' pattern="[0-9]{9}"></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
@@ -50,19 +50,20 @@
 		function getJsonFromUrl(url) {
 			if (!url)
 				url = location.search;
-			alert(url);
 			var query = url.split("?")[1];
-			alert(query);
 			var result = {};
 			query.split("&").forEach(function(part) {
 				var item = part.split("=");
 				result[item[0]] = decodeURIComponent(item[1]);
 			});
-			alert(result["action"]);
 			return result;
 		}
 		function getCustomer(event) {
 			event.preventDefault();
+			if($("#ssn-id").val()=="" && $("#cus-id").val()==""){
+				alert("Both Customer ID and Customer SSN ID cannot be empty !");
+				return;s
+			}
 			var url = window.location.href;
 			var result = getJsonFromUrl(url);
 			var action = result["action"];
@@ -72,35 +73,40 @@
 				data : $('#search').serialize() + "&action=" + action,
 				success : function(data) {
 					var json = JSON.parse(data);
-					if(action=="update"){
-						var userDetails = json["User_Details"];
-						userDetails.forEach(user => {
-							$("#cusssnID").html(user["Customer SSN ID"]);
-							$("#cusID").html(user["Customer ID"]);
-							$("#cusname").html(user["Name"]);
-							$("#age").html(user["Age"]);
-							$("#address1").html(user["Address Line 1"]);
-							$("#address2").html(user["Address Line 2"]);
-						});
-						$("#updatecustomer").attr("class","");
-						$("#searchcustomer").attr("class","hide");	
-					}else if(action=="delete"){
-						var userDetails = json["User_Details"];
-						userDetails.forEach(user => {
-							$("#dcusssnID").html(user["Customer SSN ID"]);
-							$("#dcusID").html(user["Customer ID"]);
-							$("#dcusname").html(user["Name"]);
-							$("#dage").html(user["Age"]);
-							$("#daddress1").html(user["Address Line 1"]);
-							$("#daddress2").html(user["Address Line 2"]);
-						});
-						$("#deletecustomer").attr("class","");
-						$("#searchcustomer").attr("class","hide");	
+					var userDetails=[];
+					userDetails=json["User_Details"];
+					if(userDetails.length!=0){
+						if(action=="update"){
+							userDetails.forEach(user => {
+								$("#cusssnID").html(user["Customer SSN ID"]);
+								$("#cusID").html(user["Customer ID"]);
+								$("#cusname").html(user["Name"]);
+								$("#age").html(user["Age"]);
+								$("#address1").html(user["Address Line 1"]);
+								$("#address2").html(user["Address Line 2"]);
+							});
+							$("#updatecustomer").attr("class","");
+							$("#searchcustomer").attr("class","hide");	
+						}else if(action=="delete"){
+							userDetails.forEach(user => {
+								$("#dcusssnID").html(user["Customer SSN ID"]);
+								$("#dcusID").html(user["Customer ID"]);
+								$("#dcusname").html(user["Name"]);
+								$("#dage").html(user["Age"]);
+								$("#daddress1").html(user["Address Line 1"]);
+								$("#daddress2").html(user["Address Line 2"]);
+							});
+							$("#deletecustomer").attr("class","");
+							$("#searchcustomer").attr("class","hide");	
+						}
+					}else{
+						alert("No customer found with given ID !");
 					}
 				}
 			});
 		}
-		function cancelEvent(){
+		function cancelEvent(event){
+			event.preventDefault();
 			$("#deletecustomer").attr("class","hide");
 			$("#updatecustomer").attr("class","hide");
 			$("#searchcustomer").attr("class","");

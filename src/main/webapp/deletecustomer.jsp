@@ -115,6 +115,7 @@ li.dropdown {
     <td>Address line 1</td>
     <td><span id="daddress1"></span></td>
 </tr>
+<tr> <td>&nbsp;</td> </tr>
 <tr>
     <td>Address line 2</td>
     <td><span id="daddress2"></span></td>
@@ -125,7 +126,7 @@ li.dropdown {
 <tr>
     <td><button onclick="javascript:deletecustomer(event)">Delete</button></td>
 
-    <td><button onclick="javascript:cancelEvent()">Cancel</button></td>
+    <td><button onclick="javascript:cancelEvent(event)">Cancel</button></td>
 </tr>
 </table>
  
@@ -137,7 +138,7 @@ function deletecustomer(event) {
 			if(confirm("Are you sure you want to delete?")){
 			$.ajax({
 				type : "delete",
-				url : "/customer?" + "cusid=" + $("#dcusID").html(),
+				url : "/customer?" + "dcusid=" + $("#dcusID").html(),
 				success : function(data) {
 					var json = JSON.parse(data);
 					alert(json["status"]);

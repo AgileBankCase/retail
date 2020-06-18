@@ -1,5 +1,5 @@
 RETAIL BANKING PROJECT
-<font size="6">
+<font size="12">
 CONTINUOUS INTEGRATION	Github	https://github.com/AgileBankCase/retail.git	branch master
 
 CONTINUOUS DEPLOYMENT

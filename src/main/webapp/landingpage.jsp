@@ -63,7 +63,7 @@
     </div> -->
     <div class="row">
         <div class="col-4 align-items-center textdiv">
-            <h1>Agile Bank</h1>
+            <h1>Agile Retail Bank</h1>
             <p class="align-self-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis animi, natus sint consequuntur earum non possimus molestias veritatis, quisquam odio asperiores nostrum dolorum commodi officia ipsam molestiae placeat quasi velit!</p>
             <hr>
             <a type="button" href="/logincheck" class="btn btn-primary btn-lg">Get Started</a>
